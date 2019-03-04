@@ -42,9 +42,14 @@
 
   roles:
 
+#      - {
+#           role: "sa-apache",
+#           tags: [create, apache]
+#        }
+
       - {
-           role: "sa-apache",
-           tags: [create, apache]
+           role: "sa-nginx",
+           tags: [create, nginx]
         }
 
       - {
@@ -60,25 +65,25 @@
 
     - debug: msg="Pre tasks section"
 
-    - name: Configure apache2 for php (a2enmod)
-      shell: a2enmod actions fastcgi alias proxy_fcgi
-      become: yes
-
-    - name: Configure apache2 for php (a2enconf)
-      shell: a2enconf php7.0-fpm
-      become: yes
-
-    - name: POC marker
-      copy:
-        dest: "/var/www/html/ii.php"
-        content: |
-          <?php
-          phpinfo();
-      become: yes          
-
-    - name: Restart apache
-      service: name="apache2" state="restarted"
-      become: yes      
+#    - name: Configure apache2 for php (a2enmod)
+#      shell: a2enmod actions fastcgi alias proxy_fcgi
+#      become: yes
+#
+#    - name: Configure apache2 for php (a2enconf)
+#      shell: a2enconf php7.0-fpm
+#      become: yes
+#
+#    - name: POC marker
+#      copy:
+#        dest: "/var/www/html/ii.php"
+#        content: |
+#          <?php
+#          phpinfo();
+#      become: yes
+#
+#    - name: Restart apache
+#      service: name="apache2" state="restarted"
+#      become: yes
 
 
        
